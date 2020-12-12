@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/cc/websvr/epoller/epoller.h
+sys/epoll.h
+-
+vector
+-
+assert.h
+-
+
+/home/cc/websvr/main.cpp
+iostream
+-
+server/webserver.h
+/home/cc/websvr/server/webserver.h
+
+/home/cc/websvr/server/webserver.h
+unordered_map
+-
+fcntl.h
+-
+unistd.h
+-
+assert.h
+-
+errno.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+../epoller/epoller.h
+/home/cc/websvr/epoller/epoller.h
+
