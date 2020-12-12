@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/cc/websvr/build",
-  "command": "/usr/bin/c++   -O3 -DNDEBUG -o CMakeFiles/webserver.dir/main.cpp.o -c /home/cc/websvr/main.cpp",
-  "file": "/home/cc/websvr/main.cpp"
-}
-]
