@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 
 #include "../epoller/epoller.h"
-// #include "../ilog/ilog.h"
+#include "../log/log.h"
 // #include "../timer/timer.h"
 // #include "../sqlpool/sqlpool.h"
 // #include "../threadpool/threadpool.h"
