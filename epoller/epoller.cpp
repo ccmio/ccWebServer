@@ -22,9 +22,39 @@ struct epoll_event
   epoll_data_t data;	// User data variable
 } __EPOLL_PACKED;
 */
-
+// 增加描述符
 bool Epoller::AddFd(int fd, uint32_t events) {
     if (fd < 0) return false;
     epoll_event ev = {0};
     ev.data.fd = fd;
+    ev.events = events;
+    return 0 == epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, fd, &ev);
+}
+// 修改描述符
+bool Epoller::ModFd(int fd, uint32_t events) {
+  if (fd < 0) return false;
+  epoll_event ev = {0};
+  ev.data.fd = fd;
+  ev.events = events;
+  return 0 == epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, fd, &ev);
+}
+// 删除描述符
+bool Epoller::DelFd(int fd) {
+  if (fd < 0) return false;
+  epoll_event ev = {0};
+  return 0 == epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, fd, &ev);
+}
+// 
+int Epoller::Wait(int timeoutMs = -1) {
+  return epoll_wait(epoll_fd_, &events_[0], static_cast<int>(events_.size()), timeoutMs);
+}
+
+int Epoller::GetEventFd(size_t i) const {
+  assert(i < events_.size() && i >=  0);
+  return events_[i].data.fd;
+}
+
+uint32_t Epoller::GetEvents(size_t i) const {
+  assert(i < events_.size() && i >= 0);
+  return events_[i].events;
 }

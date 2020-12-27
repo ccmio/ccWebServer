@@ -11,7 +11,7 @@
 
 #include "../epoller/epoller.h"
 #include "../log/log.h"
-// #include "../timer/timer.h"
+#include "../timer/timer.h"
 // #include "../sqlpool/sqlpool.h"
 // #include "../threadpool/threadpool.h"
 // #include "../sqlpool/sqlconnRAII.h"
@@ -60,6 +60,6 @@ public:
    
 //     std::unique_ptr<HeapTimer> timer_;
 //     std::unique_ptr<ThreadPool> threadpool_;
-//     std::unique_ptr<Epoller> epoller_;
+    std::unique_ptr<Epoller> epoller_;
 //     std::unordered_map<int, HttpConn> users_;
 };
