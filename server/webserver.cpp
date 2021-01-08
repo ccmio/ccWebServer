@@ -1,30 +1,32 @@
 #include "webserver.h"
 using namespace std;
    
-WebServer::WebServer(int port, int trigMode, int timeoutMS, bool OptLinger,
+WebServer::WebServer(int port, int trigMode, int timeout_ms_, bool OptLinger,
             int sqlPort, const char* sqlUser, const  char* sqlPwd,
             const char* dbName, int connPoolNum, int threadNum,
             bool openLog, int logLevel, int logQueSize):
-            port_(port), open_linger_(OptLinger), timeout_ms_(timeoutMS), is_close_(false),
-            // timer_(new HeapTimer()), threadpool_(new ThreadPool(threadNum)), epoller_(new Epoller()) {
-{
-return;
+            port_(port), open_linger_(OptLinger), timeout_ms_(timeout_ms_), is_close_(false),
+            timer_(new Timer()), threadpool_(new ThreadPool(threadNum)), epoller_(new Epoller()) {
+{return;
 }
 
 WebServer::~WebServer() {
-return;
+    close(listen_fd_);
+    is_close_ = true;
+    free(src_dir_);
+    SqlConnPool::Instance()->ClosePool();
 }
 
 void WebServer::Start() {
-    int timeMS = -1;
+    int time_ms_ = -1;
     if (!is_close_) {
         LogInfo("[ccmio] ==========Server Start Success==========");
     }
     while (!is_close_) {
-        if (timeout_ms_ > 0) {
-            timeoutMS = timer_->GetNextTick();
+        if (time_ms_ > 0) {
+            time_ms_ = timer_->GetNextTick();
         }
-        int eventCnt = epoller_->Wait(timeMS);
+        int eventCnt = epoller_->Wait(time_ms_);
         for (int i = 0; i < eventCnt; ++i) {
             int fd = epoller_->GetEventFd(i);
             uint32_t events = epoller_->GetEvents(i);

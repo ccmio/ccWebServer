@@ -58,8 +58,8 @@ public:
     uint32_t listen_event_;
     uint32_t conn_event_;
    
-//     std::unique_ptr<HeapTimer> timer_;
-//     std::unique_ptr<ThreadPool> threadpool_;
+    std::unique_ptr<Timer> timer_;
+    std::unique_ptr<ThreadPool> threadpool_;
     std::unique_ptr<Epoller> epoller_;
 //     std::unordered_map<int, HttpConn> users_;
 };
